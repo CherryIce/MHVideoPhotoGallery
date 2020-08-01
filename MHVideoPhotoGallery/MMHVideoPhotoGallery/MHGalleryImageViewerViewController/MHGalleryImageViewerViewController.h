@@ -11,6 +11,8 @@
 #import "MHGalleryLabel.h"
 #import "MHScrollViewLabel.h"
 
+#import <AVKit/AVKit.h>
+
 @class MHTransitionShowOverView;
 @class MHTransitionDismissMHGallery;
 @class MHGalleryController;

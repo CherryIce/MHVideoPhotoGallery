@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MHGallery.h"
 #import "MHUIImageViewContentViewAnimation.h"
+#import <AVKit/AVKit.h>
 
 @interface MHTransitionDismissMHGallery : UIPercentDrivenInteractiveTransition<UIViewControllerAnimatedTransitioning>
 

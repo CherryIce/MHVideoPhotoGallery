@@ -207,7 +207,6 @@
                     [self setNeedsStatusBarAppearanceUpdate];
                     
                     MPMoviePlayerController *player = interactiveTransition.moviePlayer;
-                    
                     player.controlStyle = MPMovieControlStyleEmbedded;
                     player.view.frame = cell.bounds;
                     player.scalingMode = MPMovieScalingModeAspectFill;

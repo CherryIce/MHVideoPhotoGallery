@@ -33,13 +33,17 @@
     __weak ExampleViewControllerImageView *blockSelf = self;
 
     [self.iv setInseractiveGalleryPresentionWithItems:galleryItems currentImageIndex:0 currentViewController:self finishCallback:^(NSInteger currentIndex,UIImage *image,MHTransitionDismissMHGallery *interactiveTransition,MHGalleryViewMode viewMode) {
-        if (viewMode == MHGalleryViewModeOverView) {
-            [blockSelf dismissViewControllerAnimated:YES completion:nil];
-        }else{
+//        if (viewMode == MHGalleryViewModeOverView) {
+//            [blockSelf dismissViewControllerAnimated:YES completion:nil];
+//        }else{
             blockSelf.iv.image = image;
             blockSelf.iv.currentImageIndex = currentIndex;
-            [blockSelf.presentedViewController dismissViewControllerAnimated:YES dismissImageView:blockSelf.iv completion:nil];
-        }
+            UIViewController * ctl = blockSelf;
+            if (blockSelf.presentedViewController) {
+                ctl = blockSelf.presentedViewController;
+            }
+            [ctl dismissViewControllerAnimated:YES dismissImageView:blockSelf.iv completion:nil];
+//        }
     }];
     
     

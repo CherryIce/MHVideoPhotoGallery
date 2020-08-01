@@ -930,8 +930,7 @@
         doubleTap.numberOfTapsRequired =2;
         
         UITapGestureRecognizer *imageTap =[UITapGestureRecognizer.alloc initWithTarget:self action:@selector(handelImageTap:)];
-        imageTap.numberOfTapsRequired =1;
-        
+        imageTap.numberOfTapsRequired = 1;
         [self.imageView addGestureRecognizer:doubleTap];
         
         self.pan.delegate = self;
@@ -1539,6 +1538,53 @@
 }
 
 -(void)handelImageTap:(UIGestureRecognizer *)gestureRecognizer{
+    //作者原来是切换控制器的部分控件隐藏于显示
+    //这里直接改成了点击就退出浏览
+    if (!self.viewController.isHiddingToolBarAndNavigationBar) {
+        if ([gestureRecognizer respondsToSelector:@selector(locationInView:)]) {
+            CGPoint tappedLocation = [gestureRecognizer locationInView:self.view];
+            if (CGRectContainsPoint(self.moviePlayerToolBarTop.frame, tappedLocation)) {
+                return;
+            }
+        }
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            
+            if (self.moviePlayerToolBarTop) {
+                self.moviePlayerToolBarTop.alpha =0;
+            }
+            [self changeUIForViewMode:MHGalleryViewModeImageViewerNavigationBarHidden];
+        } completion:^(BOOL finished) {
+            
+            self.viewController.hiddingToolBarAndNavigationBar = YES;
+            self.navigationController.navigationBar.hidden  =YES;
+            self.viewController.toolbar.hidden =YES;
+        }];
+    }else{
+       [UIView animateWithDuration:0.1 animations:^{
+           self.interactiveTransition = [MHTransitionDismissMHGallery new];
+           
+           if(UIApplication.sharedApplication.statusBarOrientation == UIInterfaceOrientationLandscapeLeft){
+               self.interactiveTransition.orientationTransformBeforeDismiss = -M_PI/2;
+           }else if(UIApplication.sharedApplication.statusBarOrientation == UIInterfaceOrientationLandscapeRight){
+               self.interactiveTransition.orientationTransformBeforeDismiss = M_PI/2;
+           }else{
+               self.interactiveTransition.orientationTransformBeforeDismiss = 0;
+           }
+           self.interactiveTransition.interactive = YES;
+           self.interactiveTransition.moviePlayer = self.moviePlayer;
+           
+           MHGalleryController *galleryViewController = [self.viewController galleryViewController];
+           if (galleryViewController.finishedCallback) {
+               galleryViewController.finishedCallback(self.pageIndex,self.imageView.image,self.interactiveTransition,self.viewController.viewModeForBarStyle);
+           }
+       } completion:^(BOOL finished) {
+           //MHStatusBar().alpha = MHShouldShowStatusBar() ? 1 : 0;
+           [self.interactiveTransition finishInteractiveTransition];
+           self.interactiveTransition = nil;
+       }];
+    }
+    /*
     if (!self.viewController.isHiddingToolBarAndNavigationBar) {
         if ([gestureRecognizer respondsToSelector:@selector(locationInView:)]) {
             CGPoint tappedLocation = [gestureRecognizer locationInView:self.view];
@@ -1575,6 +1621,7 @@
         }];
         
     }
+     */
 }
 
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {

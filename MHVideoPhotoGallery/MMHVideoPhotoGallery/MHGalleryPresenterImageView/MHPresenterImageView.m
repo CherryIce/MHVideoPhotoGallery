@@ -85,8 +85,8 @@
 }
 
 -(void)didTapOnImage{
-    
-    MHGalleryController *gallery = [MHGalleryController.alloc initWithPresentationStyle:MHGalleryViewModeImageViewerNavigationBarShown];
+    //初始化决定状态栏是否应该存在 MHGalleryViewMode
+    MHGalleryController *gallery = [MHGalleryController.alloc initWithPresentationStyle:MHGalleryViewModeImageViewerNavigationBarHidden];
     gallery.galleryItems = self.galleryItems;
     gallery.presentingFromImageView = self;
     gallery.presentationIndex =  self.currentImageIndex;
