@@ -57,7 +57,7 @@
     MHGalleryItem *tailored = [MHGalleryItem.alloc initWithURL:@"http://www.tailored-apps.com/wp-content/uploads/2014/01/wien_cropped-350x300.jpg"
                                                        galleryType:MHGalleryTypeImage];
     
-    MHGalleryItem *tailored2 = [MHGalleryItem.alloc initWithURL:@"http://www.tailored-apps.com/wp-content/uploads/2014/01/hannes.jpg"
+    MHGalleryItem *tailored2 = [MHGalleryItem.alloc initWithURL:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596288897298&di=f491956317bc54107af13d36d9349e1f&imgtype=0&src=http%3A%2F%2Fimg3.redocn.com%2Ftupian%2F20150211%2Fchouxiangqicailuoxuanxuanzhuanxiantiaoguangdianzuhetusucaieps_3940262.jpg"
                                                    galleryType:MHGalleryTypeImage];
     
     MHGalleryItem *tailored3 = [MHGalleryItem.alloc initWithURL:@"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200ff00000bdkpfpdd2r6fb5kf6m50&line=0.mp4"
@@ -176,7 +176,7 @@
     
     NSArray *galleryData = self.galleryDataSource[collectionView.tag];
     
-    MHGalleryController *gallery = [MHGalleryController galleryWithPresentationStyle:MHGalleryViewModeImageViewerNavigationBarHidden];
+    MHGalleryController *gallery = [MHGalleryController galleryWithPresentationStyle:1];
     gallery.galleryItems = galleryData;
     gallery.presentingFromImageView = imageView;
     gallery.presentationIndex = indexPath.row;
@@ -204,13 +204,13 @@
                 
                 [blockGallery dismissViewControllerAnimated:YES dismissImageView:cell.thumbnail completion:^{
                     
-                    [self setNeedsStatusBarAppearanceUpdate];
+//                    [self setNeedsStatusBarAppearanceUpdate];
                     
-                    AVPlayerViewController *player = interactiveTransition.moviePlayer;
-                    //player.controlStyle = MPMovieControlStyleEmbedded;
-                    player.view.frame = cell.bounds;
-                    //player.scalingMode = MPMovieScalingModeAspectFill;
-                    [cell.contentView addSubview:player.view];
+//                    AVPlayerViewController *player = interactiveTransition.moviePlayer;
+//                    //player.controlStyle = MPMovieControlStyleEmbedded;
+//                    player.view.frame = cell.bounds;
+//                    //player.scalingMode = MPMovieScalingModeAspectFill;
+//                    [cell.contentView addSubview:player.view];
                 }];
             });
         }

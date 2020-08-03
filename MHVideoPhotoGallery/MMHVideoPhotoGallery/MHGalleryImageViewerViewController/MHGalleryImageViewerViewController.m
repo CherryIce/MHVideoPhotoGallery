@@ -840,6 +840,7 @@
                 
                 MHGalleryController *galleryViewController = [self.viewController galleryViewController];
                 if (galleryViewController.finishedCallback) {
+                    [self.moviePlayer.player pause];
                     galleryViewController.finishedCallback(self.pageIndex,self.imageView.image,self.interactiveTransition,self.viewController.viewModeForBarStyle);
                 }
             }else{
@@ -1600,6 +1601,7 @@
            
            MHGalleryController *galleryViewController = [self.viewController galleryViewController];
            if (galleryViewController.finishedCallback) {
+               [self.moviePlayer.player pause];
                galleryViewController.finishedCallback(self.pageIndex,self.imageView.image,self.interactiveTransition,self.viewController.viewModeForBarStyle);
            }
        } completion:^(BOOL finished) {
